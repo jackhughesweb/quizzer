@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quiz:</strong>
+  <%= @category.quiz_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+
+<%= link_to 'Edit', edit_quiz_category_path(@quiz.id, @category.id) %> |
+<%= link_to 'Back', quiz_categories_path(@quiz.id) %>
+
+<br>
+
+<%= link_to 'Destroy', [@quiz, @category], method: :delete, data: { confirm: 'Are you sure?' } %>
