@@ -2,4 +2,12 @@ language: ruby
 rvm:
   - "2.0.0"
 
-# script: bundle exec rspec spec
+env:
+  global:
+    - secure: "V249oS+10Ts6Y6z+Dv9XIb6+QQZx39dZRodFMZyEq48dREPaykVqxx8YwEqWBL4cWfB8Y5ZgKLeA3GIRD5750gFKYDmFIBay381FOyUVB1JXS5T1Ltw2rOn9Og2B0CHfgiJJu7JsUwhnEAoqxTKj8skUAVpZ+CVvw9rk/TVeRnI="
+
+script: 
+  - bundle exec rake secret
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec
