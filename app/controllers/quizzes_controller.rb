@@ -7,11 +7,6 @@ class QuizzesController < ApplicationController
     @quizzes = Quiz.all
   end
 
-  # GET /quizzes/1
-  # GET /quizzes/1.json
-  def show
-  end
-
   # GET /quizzes/new
   def new
     @quiz = Quiz.new
@@ -28,7 +23,7 @@ class QuizzesController < ApplicationController
 
     respond_to do |format|
       if @quiz.save
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully created.' }
+        format.html { redirect_to quizzes_path, notice: 'Quiz was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quiz }
       else
         format.html { render action: 'new' }
@@ -42,7 +37,7 @@ class QuizzesController < ApplicationController
   def update
     respond_to do |format|
       if @quiz.update(quiz_params)
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
+        format.html { redirect_to quizzes_path, notice: 'Quiz was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

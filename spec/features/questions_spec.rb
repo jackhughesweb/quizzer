@@ -6,8 +6,8 @@ describe "Questions" do
     quiz.save
     category = Category.new(name: "Pop Music Round")
     category.save
-    visit quiz_category_path(quiz.id, category.id)
-    click_link "View Questions"
+    visit quiz_categories_path(quiz.id)
+    find(:css, "a\#queshowbtn#{quiz.id}#{category.id}", :text => 'Show Questions').click
   end
   it "allows user to create a new question" do
     quiz = Quiz.new(name: "Christmas Quiz")
@@ -31,7 +31,7 @@ describe "Questions" do
     category.save
     question = Question.new(question: "How many reindeer does Santa have?", correct_answer: "9", altone_answer: "1", alttwo_answer: "2", altthree_answer: "3")
     question.save
-    visit quiz_category_question_path(quiz.id, category.id, question.id)
+    visit quiz_category_questions_path(quiz.id, category.id)
   end
   it "allows user to edit an existing quiz" do
     quiz = Quiz.new(name: "Christmas Quiz")
@@ -40,8 +40,8 @@ describe "Questions" do
     category.save
     question = Question.new(question: "How many reindeer does Santa have?", correct_answer: "9", altone_answer: "1", alttwo_answer: "2", altthree_answer: "3")
     question.save
-    visit quiz_category_question_path(quiz.id, category.id, question.id)
-    click_link "Edit"
+    visit quiz_category_questions_path(quiz.id, category.id)
+    find(:css, "a\#queeditbtn#{quiz.id}#{category.id}#{question.id}", :text => 'Edit').click
     fill_in "Altone answer", :with => "12"
     click_button "Update Question"
   end
@@ -52,9 +52,8 @@ describe "Questions" do
     category.save
     question = Question.new(question: "How many reindeer does Santa have?", correct_answer: "9", altone_answer: "1", alttwo_answer: "2", altthree_answer: "3")
     question.save
-    visit quiz_category_question_path(quiz.id, category.id, question.id)
-    click_link "Edit"
-    click_link "Destroy"
+    visit quiz_category_questions_path(quiz.id, category.id)
+    find(:css, "a\#quedesbtn#{quiz.id}#{category.id}#{question.id}", :text => 'Destroy').click
   end
   it "should require a question" do
     Question.create(:question => "").should_not be_valid

@@ -1,13 +1,14 @@
-<h1>Listing categories for <%= @quiz.name %></h1>
+<ul class="breadcrumb">
+  <li><%= link_to 'Quizzes', quizzes_path %> <span class="divider">/</span></li>
+  <li class="active"><%= @quiz.name %> Categories</li>
+</ul>
 
-<%= link_to 'Back to quizzes', quizzes_path %>
+<h1><%= @quiz.name %> Categories</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -16,9 +17,13 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.name %></td>
-        <td><%= link_to 'Show', quiz_category_path(@quiz, category) %></td>
-        <td><%= link_to 'Edit', edit_quiz_category_path(@quiz, category) %></td>
-        <td><%= link_to 'Destroy', [@quiz, @category], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <div class="btn-group">
+            <%= link_to 'Show Questions', quiz_category_questions_path(@quiz.id, category.id), :class => 'btn btn-info', :id => "queshowbtn#{@quiz.id}#{category.id}" %>
+            <%= link_to 'Edit', edit_quiz_category_path(@quiz.id, category.id), :class => 'btn', :id => "cateditbtn#{@quiz.id}" %>
+            <%= link_to 'Destroy', [@quiz, category], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger', :id => "catdesbtn#{@quiz.id}" %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Category', new_quiz_category_path(@quiz) %>
+<%= link_to 'New Category', new_quiz_category_path(@quiz.id), :class => 'btn btn-primary' %>

@@ -9,11 +9,6 @@ class QuestionsController < ApplicationController
     @questions = Question.all
   end
 
-  # GET /questions/1
-  # GET /questions/1.json
-  def show
-  end
-
   # GET /questions/new
   def new
     @question = Question.new
@@ -31,7 +26,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to quiz_category_question_path(@quiz.id, @category.id, @question.id), notice: 'Question was successfully created.' }
+        format.html { redirect_to quiz_category_questions_path(@quiz.id, @category.id), notice: 'Question was successfully created.' }
         format.json { render action: 'show', status: :created, location: @question }
       else
         format.html { render action: 'new' }
@@ -45,7 +40,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to quiz_category_question_path(@quiz.id, @category.id, @question.id), notice: 'Question was successfully updated.' }
+        format.html { redirect_to quiz_category_questions_path(@quiz.id, @category.id), notice: 'Question was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

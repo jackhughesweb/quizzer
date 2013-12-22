@@ -1,11 +1,13 @@
-<h1>Listing quizzes</h1>
+<ul class="breadcrumb">
+  <li class="active">Quizzes</li>
+</ul>
 
-<table>
+<h1>Quizzes</h1>
+
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -14,9 +16,13 @@
     <% @quizzes.each do |quiz| %>
       <tr>
         <td><%= quiz.name %></td>
-        <td><%= link_to 'Show', quiz %></td>
-        <td><%= link_to 'Edit', edit_quiz_path(quiz) %></td>
-        <td><%= link_to 'Destroy', quiz, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <div class="btn-group">
+            <%= link_to 'Show Categories', quiz_categories_path(quiz), :class => 'btn btn-info', :id => "catshowbtn#{quiz.id}" %>
+            <%= link_to 'Edit', edit_quiz_path(quiz), :class => 'btn', :id => "quieditbtn#{quiz.id}" %>
+            <%= link_to 'Destroy', quiz, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger', :id => "quidesbtn#{quiz.id}" %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Quiz', new_quiz_path %>
+<%= link_to 'New Quiz', new_quiz_path, :class => 'btn btn-primary' %>
