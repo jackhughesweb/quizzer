@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @question.question %>
+</p>
+
+<p>
+  <strong>Correct answer:</strong>
+  <%= @question.correct_answer %>
+</p>
+
+<p>
+  <strong>Altone answer:</strong>
+  <%= @question.altone_answer %>
+</p>
+
+<p>
+  <strong>Alttwo answer:</strong>
+  <%= @question.alttwo_answer %>
+</p>
+
+<p>
+  <strong>Altthree answer:</strong>
+  <%= @question.altthree_answer %>
+</p>
+
+<%= link_to 'Edit', edit_quiz_category_question_path(@quiz.id, @category.id, @question.id) %> |
+<%= link_to 'Back', quiz_category_questions_path(@quiz.id, @category.id) %>

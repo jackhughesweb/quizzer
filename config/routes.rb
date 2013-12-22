@@ -1,7 +1,10 @@
 Quizzer::Application.routes.draw do
 
+  
   resources :quizzes do 
-    resources :categories
+    resources :categories do
+      resources :questions
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

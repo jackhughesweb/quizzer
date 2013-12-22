@@ -1,0 +1,10 @@
+<h1>Editing question</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', quiz_category_question_path(@quiz.id, @category.id, @question.id) %> |
+<%= link_to 'Back', quiz_category_questions_path(@quiz.id, @category.id) %>
+
+<br>
+
+<%= link_to 'Destroy', [@quiz, @category, @question], method: :delete, data: { confirm: 'Are you sure?' } %>

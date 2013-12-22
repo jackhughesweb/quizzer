@@ -1,0 +1,37 @@
+<h1>Listing questions for <%= @category.name %> for <%= @quiz.name %></h1>
+
+<%= link_to 'Back to categories', quiz_categories_path(@quiz.id) %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Correct answer</th>
+      <th>Altone answer</th>
+      <th>Alttwo answer</th>
+      <th>Altthree answer</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.question %></td>
+        <td><%= question.correct_answer %></td>
+        <td><%= question.altone_answer %></td>
+        <td><%= question.alttwo_answer %></td>
+        <td><%= question.altthree_answer %></td>
+        <td><%= link_to 'Show', quiz_category_question_path(@quiz.id, @category.id, question.id) %></td>
+        <td><%= link_to 'Edit', edit_quiz_category_question_path(@quiz.id, @category.id, question.id) %></td>
+        <td><%= link_to 'Destroy', [@quiz, @category, question], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question', new_quiz_category_question_path(@quiz.id, @category.id) %>
