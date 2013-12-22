@@ -42,4 +42,7 @@ describe "Categories" do
     click_link "Edit"
     click_link "Destroy"
   end
+  it "should require a name" do
+    Category.create(:name => "").should_not be_valid
+  end
 end

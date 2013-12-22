@@ -56,4 +56,19 @@ describe "Questions" do
     click_link "Edit"
     click_link "Destroy"
   end
+  it "should require a question" do
+    Question.create(:question => "").should_not be_valid
+  end
+  it "should require a correct answer" do
+    Question.create(:correct_answer => "").should_not be_valid
+  end
+  it "should require an alternative incorrect answer (one)" do
+    Question.create(:altone_answer => "").should_not be_valid
+  end
+  it "should require an alternative incorrect answer (two)" do
+    Question.create(:alttwo_answer => "").should_not be_valid
+  end
+  it "should require an alternative incorrect answer (three)" do
+    Question.create(:altthree_answer => "").should_not be_valid
+  end
 end

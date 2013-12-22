@@ -29,4 +29,7 @@ describe "Quizzes" do
     click_link "Edit"
     click_link "Destroy"
   end
+  it "should require a name" do
+    Quiz.create(:name => "").should_not be_valid
+  end
 end
