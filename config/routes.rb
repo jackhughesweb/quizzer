@@ -3,8 +3,12 @@ Quizzer::Application.routes.draw do
   
   resources :quizzes do 
     resources :categories do
-      resources :questions
+      resources :questions do
+        collection { post :sort }
+      end
+      collection { post :sort }
     end
+    collection { post :sort }
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

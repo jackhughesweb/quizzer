@@ -7,14 +7,16 @@
 <table class="table">
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
       <th></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="quizzes" data-update-url="<%= sort_quizzes_url %>">
     <% @quizzes.each do |quiz| %>
-      <tr>
+      <%= content_tag_for :tr, quiz do %>
+        <td><i class="handle icon-move"></i></td>
         <td><%= quiz.name %></td>
         <td>
           <div class="btn-group">
@@ -23,7 +25,7 @@
             <%= link_to 'Destroy', quiz, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger', :id => "quidesbtn#{quiz.id}" %>
           </div>
         </td>
-      </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

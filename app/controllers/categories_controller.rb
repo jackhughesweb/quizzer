@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = @quiz.categories.order('position')
   end
 
   # GET /categories/new
@@ -46,6 +46,13 @@ class CategoriesController < ApplicationController
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def sort
+    params[:category].each_with_index do |id, index|
+      Category.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
   end
 
   # DELETE /categories/1

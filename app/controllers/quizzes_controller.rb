@@ -4,7 +4,7 @@ class QuizzesController < ApplicationController
   # GET /quizzes
   # GET /quizzes.json
   def index
-    @quizzes = Quiz.all
+    @quizzes = Quiz.order('position')
   end
 
   # GET /quizzes/new
@@ -44,6 +44,13 @@ class QuizzesController < ApplicationController
         format.json { render json: @quiz.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def sort
+    params[:quiz].each_with_index do |id, index|
+      Quiz.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
   end
 
   # DELETE /quizzes/1

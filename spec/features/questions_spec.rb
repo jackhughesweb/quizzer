@@ -5,6 +5,7 @@ describe "Questions" do
     quiz = Quiz.new(name: "Christmas Quiz")
     quiz.save
     category = Category.new(name: "Pop Music Round")
+    category.quiz_id = quiz.id
     category.save
     visit quiz_categories_path(quiz.id)
     find(:css, "a\#queshowbtn#{quiz.id}#{category.id}", :text => 'Show Questions').click
@@ -13,6 +14,7 @@ describe "Questions" do
     quiz = Quiz.new(name: "Christmas Quiz")
     quiz.save
     category = Category.new(name: "Pop Music Round")
+    category.quiz_id = quiz.id
     category.save
     visit quiz_category_questions_path(quiz.id, category.id)
     question = FactoryGirl.create(:question)
@@ -28,8 +30,10 @@ describe "Questions" do
     quiz = Quiz.new(name: "Christmas Quiz")
     quiz.save
     category = Category.new(name: "Pop Music Round")
+    category.quiz_id = quiz.id
     category.save
     question = Question.new(question: "How many reindeer does Santa have?", correct_answer: "9", altone_answer: "1", alttwo_answer: "2", altthree_answer: "3")
+    question.category_id = category.id
     question.save
     visit quiz_category_questions_path(quiz.id, category.id)
   end
@@ -37,8 +41,10 @@ describe "Questions" do
     quiz = Quiz.new(name: "Christmas Quiz")
     quiz.save
     category = Category.new(name: "Pop Music Round")
+    category.quiz_id = quiz.id
     category.save
     question = Question.new(question: "How many reindeer does Santa have?", correct_answer: "9", altone_answer: "1", alttwo_answer: "2", altthree_answer: "3")
+    question.category_id = category.id
     question.save
     visit quiz_category_questions_path(quiz.id, category.id)
     find(:css, "a\#queeditbtn#{quiz.id}#{category.id}#{question.id}", :text => 'Edit').click
@@ -49,8 +55,10 @@ describe "Questions" do
     quiz = Quiz.new(name: "Christmas Quiz")
     quiz.save
     category = Category.new(name: "Pop Music Round")
+    category.quiz_id = quiz.id
     category.save
     question = Question.new(question: "How many reindeer does Santa have?", correct_answer: "9", altone_answer: "1", alttwo_answer: "2", altthree_answer: "3")
+    question.category_id = category.id
     question.save
     visit quiz_category_questions_path(quiz.id, category.id)
     find(:css, "a\#quedesbtn#{quiz.id}#{category.id}#{question.id}", :text => 'Destroy').click

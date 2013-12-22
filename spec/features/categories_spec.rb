@@ -20,9 +20,10 @@ describe "Categories" do
     quiz = Quiz.new(name: "Christmas Quiz")
     quiz.save
     category = Category.new(name: "Pop Music Round")
+    category.quiz_id = quiz.id
     category.save
     visit quiz_categories_path(quiz.id)
-    find(:css, "a\#cateditbtn#{quiz.id}", :text => 'Edit').click
+    find(:css, "a\#cateditbtn#{quiz.id}#{category.id}", :text => 'Edit').click
     fill_in "Name", :with => "Christmas Music Round"
     click_button "Update Category"
   end
@@ -30,9 +31,10 @@ describe "Categories" do
     quiz = Quiz.new(name: "Christmas Quiz")
     quiz.save
     category = Category.new(name: "Pop Music Round")
+    category.quiz_id = quiz.id
     category.save
     visit quiz_categories_path(quiz.id)
-    find(:css, "a\#catdesbtn#{quiz.id}", :text => 'Destroy').click
+    find(:css, "a\#catdesbtn#{quiz.id}#{category.id}", :text => 'Destroy').click
   end
   it "should require a name" do
     Category.create(:name => "").should_not be_valid

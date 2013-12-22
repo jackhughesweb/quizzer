@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = @category.questions.order('position')
   end
 
   # GET /questions/new
@@ -49,6 +49,13 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def sort
+    params[:question].each_with_index do |id, index|
+      Question.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
+  end
+
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
@@ -75,6 +82,6 @@ class QuestionsController < ApplicationController
     end
 
     def set_category
-      @category = Category.find(params[:category_id])
+      @category = @quiz.categories.find(params[:category_id])
     end
 end

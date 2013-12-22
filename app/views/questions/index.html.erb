@@ -9,6 +9,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th></th>
       <th>Question</th>
       <th>Correct answer</th>
       <th>Altone answer</th>
@@ -20,9 +21,10 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="questions" data-update-url="<%= sort_quiz_category_questions_url(@quiz.id, @category.id) %>">
     <% @questions.each do |question| %>
-      <tr>
+      <%= content_tag_for :tr, question do %>
+        <td><i class="handle icon-move"></i></td>
         <td><%= question.question %></td>
         <td><%= question.correct_answer %></td>
         <td><%= question.altone_answer %></td>
@@ -34,7 +36,7 @@
             <%= link_to 'Destroy', [@quiz, @category, question], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger', :id => "quedesbtn#{@quiz.id}#{@category.id}#{question.id}" %>
           </div>
         </td>
-      </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
