@@ -9,16 +9,18 @@
   <thead>
     <tr>
       <th></th>
+      <th>#</th>
       <th>Name</th>
       <th></th>
     </tr>
   </thead>
 
   <tbody id="categories" data-update-url="<%= sort_quiz_categories_url(@quiz.id) %>">
-    <% @categories.each do |category| %>
+    <% @categories.each_with_index do |category, index| %>
       <%= content_tag_for :tr, category do %>
         <td><i class="handle icon-move"></i></td>
-        <td><%= category.name %></td>
+        <td><%= index + 1 %></td>
+        <td><%= category.name %> (<%= category.questions.count %> questions)</td>
         <td>
           <div class="btn-group">
             <%= link_to 'Show Questions', quiz_category_questions_path(@quiz.id, category.id), :class => 'btn btn-info', :id => "queshowbtn#{@quiz.id}#{category.id}" %>

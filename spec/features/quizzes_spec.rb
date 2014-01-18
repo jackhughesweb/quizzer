@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe "Quizzes" do
+
+  before(:each) do
+    login
+  end
+
+  after(:each) do
+    logout
+  end
+
   it "allows user to create a new quiz" do
     quiz = FactoryGirl.create(:quiz)
     visit quizzes_path

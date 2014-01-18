@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login
   before_action :set_quiz
   before_action :set_category
 
@@ -75,6 +76,12 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:question, :correct_answer, :altone_answer, :alttwo_answer, :altthree_answer)
+    end
+
+    def require_login
+      unless user_signed_in?
+        redirect_to new_user_session_url, flash: { error: "Please login first"}
+      end
     end
 
     def set_quiz

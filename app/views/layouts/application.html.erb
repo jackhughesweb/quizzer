@@ -3,8 +3,10 @@
 <head>
   <title>Quizzer</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <style>body { padding-top: 60px; }</style>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 <body>
 
@@ -19,7 +21,14 @@
       <a class="brand" href="/">Quizzer</a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li><%= link_to "Quizzes", quizzes_path %></li>
+            <% if user_signed_in? %>
+              <li class="navbar-text"><%= current_user.email %></li>
+              <li><%= link_to "Quizzes", quizzes_path %></li>
+              <li><%= link_to "Games", games_path %></li>
+              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Login", new_user_session_path %></li>
+            <% end %>
         </ul>
       </div>
     </div>
@@ -27,6 +36,13 @@
 </div>
 
 <div class="container">
+  <% flash.each do |name, msg| %>
+    <div class="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= msg %>
+    </div>
+  <% end %>
+
   <%= yield %>
 </div>
 

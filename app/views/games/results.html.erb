@@ -1,0 +1,60 @@
+<h1><%= @game.quiz.name %> Results</h1>
+
+<br>
+
+<% @categories.each do |category| %>
+  <h2><%= category.name %></h2>
+  <br>
+  <% category.questions.each do |question| %>
+    <p><%= question.question %></p>
+    <p><span class="label label-success">Correct Answer</span> <%= question.correct_answer %></p>
+    <br>
+    <% @answers = Answer.where("question_id = ?", question.id).where("game_id = ?", @game.id) %>
+    <table class="table">
+      <thead>
+        <th>
+          Player
+        </th>
+        <th>
+          Answer
+        </th>
+      </thead>
+      <tbody>
+        <% @answers.each do |answer| %>
+          <tr>
+            <td><%= answer.player.name %></td>
+            <td><%= answer.answer %>
+              <% if answer.answer == question.correct_answer %>
+                <span class="label label-success">Correct</span>
+              <% else %>
+                <span class="label label-important">Incorrect</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+  <% end %>
+  <br>
+<% end %>
+<br>
+<br>
+<br>
+<h2>Scores</h2>
+<br>
+<table class="table">
+  <thead>
+    <th>Player</th>
+    <th>Score</th>
+  </thead>
+  <tbody>
+    <% @players.each do |player| %>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= @playerscores[player.id] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+           

@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe "Questions" do
+
+  before(:each) do
+    login
+  end
+
+  after(:each) do
+    logout
+  end
+
   it "is accessible from a category" do
     quiz = Quiz.new(name: "Christmas Quiz")
     quiz.save

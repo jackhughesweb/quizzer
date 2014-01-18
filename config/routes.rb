@@ -1,6 +1,7 @@
 Quizzer::Application.routes.draw do
 
   
+  devise_for :users
   resources :quizzes do 
     resources :categories do
       resources :questions do
@@ -11,11 +12,31 @@ Quizzer::Application.routes.draw do
     collection { post :sort }
   end
 
+  resources :games
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'pages#index'
+
+  get 'g/:link_url' => 'games#playgame', as: :playgame
+  get 'g/:link_url/update' => 'games#gameupdate', as: :gameupdate
+
+  get 'g/:link_url/player/new' => 'players#new', as: :newplayer
+  get 'g/:link_url/player/signup' => 'players#signup', as: :newplayersignup
+  post 'g/:link_url/player/create' => 'players#create', as: :newplayercreate
+  get 'g/:link_url/player/login' => 'players#login', as: :newplayerlogin
+  post 'g/:link_url/player/login' => 'players#join', as: :newplayerjoin
+  get 'g/:link_url/player/logout' => 'players#logout', as: :newplayerlogout
+  get 'glogout' => 'players#logoutf', as: :forcelogout
+
+  get 'g/:link_url/dashboard' => 'games#dashboard', as: :gamedashboard
+  get 'g/:link_url/start' => 'games#start', as: :gamestart
+  get 'g/:link_url/next' => 'games#nextquestion', as: :gamenextquestion
+  get 'g/:link_url/results' => 'games#results', as: :gameresults
+
+  post 'g/:link_url/questions/answer' => 'answers#new', as: :gameanswer
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

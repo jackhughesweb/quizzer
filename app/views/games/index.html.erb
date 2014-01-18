@@ -1,0 +1,63 @@
+<h1>Games</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Quiz</th>
+      <th></td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td>
+          <%= Quiz.find(game.quiz_id).name %>
+          <br>
+          <small><%= game.created_at.to_formatted_s(:long) %></small>
+        </td>
+        <td>
+          <div class="btn-group">
+            <%= link_to 'Play', game_path(game.id), :class => 'btn btn-success' %>
+            <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="well well-small">
+  <h4>New Game</h4>
+  <%= form_for(@game, :controller => 'games', :action => 'create', :method => 'post') do |f| %>
+    <% if @game.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+        <ul>
+        <% @game.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :quiz_id %>
+      <%= f.collection_select :quiz_id, Quiz.order(:position), :id, :name %>
+    </div>
+    <div class="field">
+      <%= f.label :link_url %>
+      <%= f.text_field :link_url %>
+    </div>
+    <div class="field">
+      <%= f.label :joinable, :class => 'checkbox' do %>
+        <%= f.check_box :joinable %>
+        Joinable
+      <% end %>
+    </div>
+    <div class="actions">
+      <%= f.submit :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

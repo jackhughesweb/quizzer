@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login
 
   # GET /quizzes
   # GET /quizzes.json
@@ -67,6 +68,12 @@ class QuizzesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
       @quiz = Quiz.find(params[:id])
+    end
+
+    def require_login
+      unless user_signed_in?
+        redirect_to new_user_session_url, flash: { error: "Please login first"}
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

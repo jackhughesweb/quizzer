@@ -1,0 +1,8 @@
+<h1><%= @game.quiz.name %></h1>
+
+<% if @game.joinable? %>
+<%= link_to "Register as a new player", newplayersignup_path, :class => "btn btn-large btn-primary" %>
+<br>
+<br>
+<% end %>
+<%= link_to "Join as an existing player", newplayerlogin_path, :class => "btn btn-large" %>

@@ -1,0 +1,45 @@
+body{ 
+  font-size: 1.2rem;
+  background-color: #fff;
+  padding-top: 5rem;
+}
+.dash-header{
+  background-color: #eee;
+  padding: 1rem;
+  text-align: center;
+}
+.questionans{
+  font-size: 1.8rem;
+  line-height: 1.4;
+}
+.questionanstable{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1.question{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+  text-align: center;
+}
+.ta-center{
+  text-align: center;
+}
+
+.controls{
+  position: absolute;
+  width: 100%;
+  padding: 1rem;
+  height: 4rem;
+  bottom: 0;
+  left: 0;
+  background-color: #eee;
+  box-sizing: border-box;
+}
+span[data-player-id]:after{
+  content: ',';
+}
+span[data-player-id]:last-child:after{
+  content: '';
+}

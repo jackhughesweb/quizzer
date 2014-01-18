@@ -13,4 +13,8 @@ FactoryGirl.define do
     alttwo_answer "two"
     altthree_answer "three"
   end
+  factory :user do
+    email "test@example.com"
+    password "password"
+  end
 end

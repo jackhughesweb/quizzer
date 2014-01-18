@@ -1,0 +1,31 @@
+<h1>Existing player</h1>
+
+
+<%= form_for(@player, :url => newplayerjoin_path(@game.link_url)) do |f| %>
+  <% if @player.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@player.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% @player.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :passcode %><br>
+    <%= f.number_field :passcode, :pattern => "[0-9]*" %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+<% if @game.joinable? %>
+<%= link_to "Register as a new player", newplayersignup_path %>
+<% end %>

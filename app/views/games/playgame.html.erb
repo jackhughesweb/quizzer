@@ -1,0 +1,13 @@
+<div id="gamecontent" data-player-name="<%= @player.name %>">
+  <p>Welcome, <strong><%= @player.name %></strong></p>
+  <p>Waiting for the quiz to start...</p>
+  <div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+
+<br>
+  <br>
+  <%= link_to "Log out", newplayerlogout_path, :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
